@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kofárna Žižkov — Specialty Coffee Praha 3</title>
+  <meta name="description" content="Specialty coffee bar v srdci Žižkova. Espresso bar, batch brew, domácí pečivo. Přijďte na dobrou kávu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
+    :root {
+      --espresso:    #2B1F18;
+      --charcoal:    #1C1C1B;
+      --oat:         #F0E8DC;
+      --cream:       #FAF6F0;
+      --terracotta:  #B85C38;
+      --sage:        #4A5C4E;
+      --mid-brown:   #6B4F3A;
+      --light-rule:  #D6CCBF;
+      --mono:        'IBM Plex Mono', monospace;
+      --serif:       'Playfair Display', serif;
+      --sans:        'IBM Plex Sans', sans-serif;
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+
+    /* =============================================
+       UTILITIES
+    ============================================= */
+    .mono { font-family: var(--mono); }
+    .serif { font-family: var(--serif); }
+    .u-terracotta { color: var(--terracotta); }
+    .u-sage { color: var(--sage); }
+    .border-top { border-top: 1px solid var(--light-rule); }
+    .border-bottom { border-bottom: 1px solid var(--light-rule); }
+
+    /* =============================================
+       NAV
+    ============================================= */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 3.5rem;
+      background: var(--espresso);
+      border-bottom: 2px solid var(--terracotta);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--oat);
+      letter-spacing: 0.03em;
+    }
+    .nav-logo span { color: var(--terracotta); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--oat);
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--espresso);
+      background: var(--terracotta);
+      padding: 0.45rem 1.1rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--oat); }
+
+    /* =============================================
+       HERO — SPLIT SCREEN
+    ============================================= */
+    .hero {
+      margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 3.5rem);
+    }
+    .hero__image-col {
+      position: relative;
+      overflow: hidden;
+      background: var(--espresso);
+    }
+    .hero__image-col img {
+      height: 100%;
+      transition: transform 6s ease;
+    }
+    .hero__image-col:hover img { transform: scale(1.025); }
+    .hero__image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(43,31,24,0.35) 0%,
+        rgba(43,31,24,0.0) 100%
+      );
+    }
+    .hero__tag {
+      position: absolute;
+      bottom: 2rem; left: 2rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--oat);
+      background: var(--terracotta);
+      padding: 0.35rem 0.8rem;
+    }
+
+    .hero__content-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4rem 3.5rem 3.5rem;
+      background: var(--oat);
+      border-left: 3px solid var(--espresso);
+    }
+    .hero__eyebrow {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid-brown);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--terracotta);
+    }
+    .hero__headline {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(3.2rem, 6vw, 6rem);
+      line-height: 0.95;
+      color: var(--espresso);
+      letter-spacing: -0.02em;
+    }
+    .hero__headline em {
+      font-style: italic;
+      color: var(--terracotta);
+      display: block;
+    }
+    .hero__subline {
+      margin-top: 2rem;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mid-brown);
+      max-width: 28ch;
+      line-height: 1.7;
+      border-left: 2px solid var(--terracotta);
+      padding-left: 1rem;
+    }
+    .hero__meta {
+      margin-top: auto;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--light-rule);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .hero__meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .hero__meta-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid-brown);
+      opacity: 0.7;
+    }
+    .hero__meta-value {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--espresso);
+      font-weight: 500;
+    }
+    .hero__meta-value strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    /* =============================================
+       MARQUEE STRIP
+    ============================================= */
+    .marquee-strip {
+      background: var(--espresso);
+      color: var(--oat);
+      padding: 0.75rem 0;
+      overflow: hidden;
+      border-top: 2px solid var(--terracotta);
+      border-bottom: 2px solid var(--terracotta);
+    }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track span {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .marquee-track span::after {
+      content: '✦';
+      color: var(--terracotta);
+      font-size: 0.5rem;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* =============================================
+       SECTION: DEN V KOFÁRNĚ (INTRO)
+    ============================================= */
+    .intro {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+    }
+    .intro__left {
+      background: var(--espresso);
+      padding: 5rem 3rem 5rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .intro__num {
+      font-family: var(--mono);
+      font-size: 7rem;
+      font-weight: 400;
+      color: var(--terracotta);
+      opacity: 0.35;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .intro__title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--oat);
+      line-height: 1.1;
+    }
+    .intro__title em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+    .intro__right {
+      padding: 5rem 4rem;
+      border-left: 1px solid var(--light-rule);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .intro__body {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--mid-brown);
+      max-width: 52ch;
+      line-height: 1.8;
+    }
+    .intro__body strong {
+      color: var(--espresso);
+      font-weight: 500;
+    }
+    .intro__pull {
+      margin-top: 2.5rem;
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      font-style: italic;
+      color: var(--espresso);
+      line-height: 1.4;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--terracotta);
+    }
+
+    /* =============================================
+       SECTION: ŘEMESLO (THE CRAFT)
+    ============================================= */
+    .craft {
+      border-top: 1px solid var(--light-rule);
+      border-bottom: 1px solid var(--light-rule);
+    }
+    .craft__header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      padding: 3.5rem 3.5rem 0;
+      border-bottom: 1px solid var(--light-rule);
+      padding-bottom: 2rem;
+    }
+    .craft__kicker {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      padding-top: 0.4rem;
+    }
+    .craft__heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      color: var(--espresso);
+      line-height: 1.05;
+    }
+
+    .craft__list {
+      list-style: none;
+      border-top: none;
+    }
+    .craft__item {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr auto;
+      align-items: baseline;
+      gap: 1.5rem 2rem;
+      padding: 2rem 3.5rem;
+      border-bottom: 1px solid var(--light-rule);
+      transition: background 0.2s;
+    }
+    .craft__item:last-child { border-bottom: none; }
+    .craft__item:hover { background: var(--oat); }
+    .craft__item-num {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--terracotta);
+      letter-spacing: 0.1em;
+      align-self: flex-start;
+      padding-top: 0.4rem;
+    }
+    .craft__item-content {}
+    .craft__item-name {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+      font-weight: 700;
+      color: var(--espresso);
+      line-height: 1.15;
+    }
+    .craft__item-name em {
+      font-style: italic;
+      color: var(--mid-brown);
+    }
+    .craft__item-desc {
+      margin-top: 0.4rem;
+      font-size: 0.88rem;
+      color: var(--mid-brown);
+      max-width: 55ch;
+      line-height: 1.6;
+    }
+    .craft__item-origin {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sage);
+      white-space: nowrap;
+      align-self: flex-start;
+      padding-top: 0.5rem;
+      border: 1px solid var(--sage);
+      padding: 0.3rem 0.7rem;
+    }
+
+    /* =============================================
+       SECTION: ORIGINS HIGHLIGHT
+    ============================================= */
+    .origins {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 55vh;
+      border-top: 1px solid var(--light-rule);
+    }
+    .origins__image {
+      overflow: hidden;
+      position: relative;
+    }
+    .origins__image img { height: 100%; }
+    .origins__content {
+      background: var(--espresso);
+      padding: 4rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .origins__eyebrow {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+    .origins__heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--oat);
+      line-height: 1.1;
+    }
+    .origins__heading em { font-style: italic; color: var(--terracotta); }
+    .origins__text {
+      font-size: 0.95rem;
+      color: var(--oat);
+      opacity: 0.75;
+      line-height: 1.75;
+      max-width: 42ch;
+    }
+    .origins__table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .origins__table tr {
+      border-top: 1px solid rgba(240,232,220,0.15);
+    }
+    .origins__table tr:first-child { border-top: none; }
+    .origins__table td {
+      padding: 0.7rem 0;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--oat);
+      letter-spacing: 0.05em;
+    }
+    .origins__table td:first-child { color: var(--terracotta); padding-right: 1.5rem; }
+    .origins__table td:last-child { opacity: 0.55; text-align: right; }
+
+    /* =============================================
+       SECTION: PROSTOR (THE SPACE)
+    ============================================= */
+    .space {
+      border-top: 1px solid var(--light-rule);
+    }
+    .space__header {
+      padding: 3.5rem 3.5rem 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: end;
+      gap: 2rem;
+      border-bottom: 1px solid var(--light-rule);
+    }
+    .space__kicker {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      align-self: center;
+    }
+    .space__heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      color: var(--espresso);
+      line-height: 1.05;
+    }
+    .space__subtext {
+      font-size: 0.9rem;
+      color: var(--mid-brown);
+      max-width: 50ch;
+      margin-top: 0.5rem;
+    }
+
+    /* Masonry gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 260px 260px;
+      gap: 3px;
+      background: var(--espresso);
+      border-top: 3px solid var(--espresso);
+    }
+    .gallery__item { overflow: hidden; position: relative; background: var(--espresso); }
+    .gallery__item img { transition: transform 0.5s ease; }
+    .gallery__item:hover img { transform: scale(1.04); }
+
+    .gallery__item--a { grid-column: 1 / 6; grid-row: 1 / 2; }
+    .gallery__item--b { grid-column: 6 / 9; grid-row: 1 / 3; }
+    .gallery__item--c { grid-column: 9 / 13; grid-row: 1 / 2; }
+    .gallery__item--d { grid-column: 1 / 4; grid-row: 2 / 3; }
+    .gallery__item--e { grid-column: 4 / 6; grid-row: 2 / 3; }
+    .gallery__item--f { grid-column: 9 / 13; grid-row: 2 / 3; }
+
+    .gallery__caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.6rem 0.8rem;
+      background: rgba(43,31,24,0.85);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--oat);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .gallery__item:hover .gallery__caption { opacity: 1; }
+
+    /* =============================================
+       SECTION: COMMUNITY TEXT BREAK
+    ============================================= */
+    .community {
+      background: var(--sage);
+      padding: 5rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .community__quote {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+    .community__quote em { color: var(--oat); }
+    .community__text {
+      font-size: 0.95rem;
+      color: var(--oat);
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+    .community__text p + p { margin-top: 1rem; }
+
+    /* =============================================
+       SECTION: DENNÍ MENU / OTÁVÍRACÍ DOBA
+    ============================================= */
+    .hours-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--light-rule);
+    }
+    .hours-col {
+      padding: 4rem 3.5rem;
+    }
+    .hours-col:first-child {
+      border-right: 1px solid var(--light-rule);
+    }
+    .hours__heading {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 2rem;
+    }
+    .hours__table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours__table tr {
+      border-bottom: 1px solid var(--light-rule);
+    }
+    .hours__table tr:last-child { border-bottom: none; }
+    .hours__table td {
+      padding: 0.85rem 0;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--espresso);
+    }
+    .hours__table td:last-child {
+      text-align: right;
+      font-weight: 500;
+    }
+    .hours__table .closed { color: var(--mid-brown); opacity: 0.5; }
+    .hours__table .open-today {
+      color: var(--sage);
+      font-weight: 500;
+    }
+    .specials__list { list-style: none; }
+    .specials__list li {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--light-rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .specials__list li:last-child { border-bottom: none; }
+    .specials__name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--espresso);
+    }
+    .specials__note {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--mid-brown);
+      opacity: 0.65;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      background: var(--espresso);
+      border-top: 3px solid var(--terracotta);
+    }
+    .footer__main {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding: 4rem 3.5rem;
+      border-bottom: 1px solid rgba(240,232,220,0.12);
+    }
+    .footer__brand-name {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--oat);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .footer__brand-sub {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+    }
+    .footer__desc {
+      font-size: 0.88rem;
+      color: var(--oat);
+      opacity: 0.55;
+      line-height: 1.7;
+      max-width: 38ch;
+    }
+    .footer__col-heading {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.25rem;
+    }
+    .footer__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .footer__list li {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--oat);
+      opacity: 0.65;
+      line-height: 1.5;
+    }
+    .footer__address-street {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--oat);
+      line-height: 1.6;
+    }
+    .footer__ig-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--oat);
+      opacity: 0.75;
+      transition: opacity 0.2s;
+      margin-top: 0.75rem;
+    }
+    .footer__ig-link:hover { opacity: 1; }
+    .footer__ig-link::before {
+      content: '→';
+      color: var(--terracotta);
+    }
+    .footer__bottom {
+      padding: 1.25rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer__copy {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--oat);
+      opacity: 0.3;
+      text-transform: uppercase;
+    }
+    .footer__made {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--oat);
+      opacity: 0.25;
+    }
+
+    /* =============================================
+       SCROLL ANIMATIONS
+    ============================================= */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; grid-template-rows: 55vw auto; }
+      .hero__content-col { border-left: none; border-top: 3px solid var(--espresso); padding: 2.5rem 1.5rem; }
+      .hero__meta { grid-template-columns: 1fr 1fr; }
+
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+
+      .intro { grid-template-columns: 1fr; }
+      .intro__left { padding: 3rem 1.5rem; }
+      .intro__right { padding: 3rem 1.5rem; border: none; border-top: 1px solid var(--light-rule); }
+
+      .craft__header { grid-template-columns: 1fr; gap: 0.5rem; }
+      .craft__item { grid-template-columns: 2.5rem 1fr; }
+      .craft__item-origin { display: none; }
+
+      .origins { grid-template-columns: 1fr; grid-template-rows: 40vw auto; }
+      .origins__image { min-height: 40vw; }
+
+      .space__header { grid-template-columns: 1fr; }
+      .space__kicker { writing-mode: horizontal-tb; transform: none; margin-bottom: 0.5rem; }
+
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 200px);
+      }
+      .gallery__item--a { grid-column: 1 / 2; grid-row: 1 / 2; }
+      .gallery__item--b { grid-column: 2 / 3; grid-row: 1 / 3; }
+      .gallery__item--c { grid-column: 1 / 2; grid-row: 2 / 3; }
+      .gallery__item--d { grid-column: 1 / 2; grid-row: 3 / 4; }
+      .gallery__item--e { display: none; }
+      .gallery__item--f { grid-column: 2 / 3; grid-row: 3 / 4; }
+
+      .community { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+      .hours-row { grid-template-columns: 1fr; }
+      .hours-col:first-child { border-right: none; border-bottom: 1px solid var(--light-rule); }
+      .hours-col { padding: 2.5rem 1.5rem; }
+
+      .footer__main { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+      .footer__bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+
+      .craft__header,
+      .space__header { padding: 2.5rem 1.5rem 1.5rem; }
+      .craft__item { padding: 1.75rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav aria-label="Hlavní navigace">
+    <span class="nav-logo">Kofárna <span>Žižkov</span></span>
+    <ul class="nav-links">
+      <li><a href="#remeslo">Řemeslo</a></li>
+      <li><a href="#prostor">Prostor</a></li>
+      <li><a href="#casy">Otevírací hodiny</a></li>
+    </ul>
+    <a href="#casy" class="nav-cta">Navštivte nás</a>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Úvod">
+    <div class="hero__image-col">
+      <img
+        src="images/hero-espresso.png"
+        alt="Espresso v Kofárně Žižkov"
+        loading="eager"
+      />
+      <div class="hero__image-overlay"></div>
+      <div class="hero__tag mono">Praha 3 — Žižkov</div>
+    </div>
+
+    <div class="hero__content-col">
+      <div>
+        <p class="hero__eyebrow">Specialty coffee bar</p>
+        <h1 class="hero__headline">
+          Káva,
+          <em>která<br>něco říká.</em>
+        </h1>
+        <p class="hero__subline">
+          Není tu nic navíc. Jen poctivá káva z pečlivě vybraných
+          zdrojů, starý bar a čtvrtě plná charakteru.
+        </p>
+      </div>
+
+      <div class="hero__meta" id="casy">
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Adresa</span>
+          <span class="hero__meta-value">
+            <strong>Seifertova 42</strong>
+            Praha 3 – Žižkov
+          </span>
+        </div>
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Otevírací hodiny</span>
+          <span class="hero__meta-value">
+            <strong>Po–Pá: 7:30–18:00</strong>
+            So–Ne: 8:30–17:00
+          </span>
+        </div>
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Kontakt</span>
+          <span class="hero__meta-value">
+            kofarna@zizkov.cz
+          </span>
+        </div>
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Instagram</span>
+          <span class="hero__meta-value">
+            @kofarna.zizkov
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Specialty káva</span>
+      <span>Single Origin</span>
+      <span>Espresso bar</span>
+      <span>Batch Brew</span>
+      <span>Domácí pečivo</span>
+      <span>Praha 3 – Žižkov</span>
+      <span>Specialty káva</span>
+      <span>Single Origin</span>
+      <span>Espresso bar</span>
+      <span>Batch Brew</span>
+      <span>Domácí pečivo</span>
+      <span>Praha 3 – Žižkov</span>
+      <span>Specialty káva</span>
+      <span>Single Origin</span>
+      <span>Espresso bar</span>
+      <span>Batch Brew</span>
+      <span>Domácí pečivo</span>
+      <span>Praha 3 – Žižkov</span>
+    </div>
+  </div>
+
+  <!-- ===== INTRO ===== -->
+  <section class="intro fade-in">
+    <div class="intro__left">
+      <div class="intro__num mono" aria-hidden="true">01</div>
+      <h2 class="intro__title">
+        Malé místo,<br>
+        <em>velké myšlenky.</em>
+      </h2>
+    </div>
+    <div class="intro__right">
+      <p class="intro__body">
+        Kofárna Žižkov vznikla z jednoduché potřeby. <strong>Mít v čtvrti kavárnu,
+        kde to není o trendech, ale o kávě samotné.</strong> Žižkov má svůj rytmus —
+        trochu drsný, upřímný, s historií napsanou na fasádách. Přesně takový
+        chceme být i my. Žádný lešení ze social médií, žádné performativní
+        „specialty" nálepky.
+      </p>
+      <p class="intro__pull">
+        „Dobrá káva si reklamu nepotřebuje. Mluví sama za sebe."
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CRAFT / MENU ===== -->
+  <section class="craft fade-in" id="remeslo" aria-labelledby="craft-heading">
+    <div class="craft__header">
+      <span class="craft__kicker mono">— Řemeslo</span>
+      <div>
+        <h2 class="craft__heading" id="craft-heading">Co najdete<br>u nás za barem.</h2>
+      </div>
+    </div>
+
+    <ul class="craft__list" aria-label="Nabídka">
+
+      <li class="craft__item">
+        <span class="craft__item-num mono">01</span>
+        <div class="craft__item-content">
+          <h3 class="craft__item-name">Espresso bar <em>— klasika i alternativa</em></h3>
+          <p class="craft__item-desc">
+            Každý den čerstvě namletá káva na La Marzocco. Ristretto, espresso, lungo,
+            flat white, cortado — připraveno tak, jak má být. Žádné cukrové sirupy,
+            žádná umělá ochucení.
+          </p>
+        </div>
+        <span class="craft__item-origin mono">Espresso bar</span>
+      </li>
+
+      <li class="craft__item">
+        <span class="craft__item-num mono">02</span>
+        <div class="craft__item-content">
+          <h3 class="craft__item-name">Batch Brew <em>— filtrovaná do posledního doušku</em></h3>
+          <p class="craft__item-desc">
+            Pro ty, kteří ráno nechtějí čekat. Čerstvě vařená filtrovaná káva připravená
+            ve velkém, ale s péčí ve velkém malém. Střídáme origins každých pár týdnů —
+            podle sezóny a nálady.
+          </p>
+        </div>
+        <span class="craft__item-origin mono">Filter Coffee</span>
+      </li>
+
+      <li class="craft__item">
+        <span class="craft__item-num mono">03</span>
+        <div class="craft__item-content">
+          <h3 class="craft__item-name">Pour Over <em>— na objednávku, s klidem</em></h3>
+          <p class="craft__item-desc">
+            Máte čas a chuť na víc? V klidu uvaříme single origin přes V60 nebo Chemex.
+            Doporučíme, vysvětlíme, proč tahle káva voní právě takhle a odkud pochází.
+          </p>
+        </div>
+        <span class="craft__item-origin mono">Pour Over</span>
+      </li>
+
+      <li class="craft__item">
+        <span class="craft__item-num mono">04</span>
+        <div class="craft__item-content">
+          <h3 class="craft__item-name">Domácí pečivo <em>— od sousedů z ulice</em></h3>
+          <p class="craft__item-desc">
+            Croissanty, šneci s kardamonem a sezónní kousky. Pečíme sami nebo nakupujeme
+            od místní pekárny dva bloky odtud. Nic zmrazeného, nic z továrny.
+          </p>
+        </div>
+        <span class="craft__item-origin mono">Pečivo</span>
+      </li>
+
+    </ul>
+  </section>
+
+  <!-- ===== ORIGINS SPLIT ===== -->
+  <section class="origins fade-in">
+    <div class="origins__image">
+      <img
+        src="images/gallery-beans.png"
+        alt="Pytle s kávou ze single origin farmárnů"
+        loading="lazy"
+      />
+    </div>
+    <div class="origins__content">
+      <p class="origins__eyebrow mono">— Původ kávy</p>
+      <h2 class="origins__heading">
+        Víme, odkud<br><em>káva přišla.</em>
+      </h2>
+      <p class="origins__text">
+        Spolupracujeme výhradně s pražírnami, které znají farmáře jménem.
+        Každý měsíc rotujeme výběr — vždy single origin, vždy s příběhem.
+      </p>
+      <table class="origins__table" aria-label="Aktuální origins">
+        <tr>
+          <td>Etiopie</td>
+          <td>Yirgacheffe, přírodní zpracování</td>
+          <td>Espresso / Filter</td>
+        </tr>
+        <tr>
+          <td>Kolumbie</td>
+          <td>Huila, omytá</td>
+          <td>Filter</td>
+        </tr>
+        <tr>
+          <td>Guatemala</td>
+          <td>Antigua, honey</td>
+          <td>Espresso</td>
+        </tr>
+        <tr>
+          <td>Rwanda</td>
+          <td>Nyamasheke, washed</td>
+          <td>Pour Over</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== PROSTOR / GALERIE ===== -->
+  <section class="space fade-in" id="prostor" aria-labelledby="space-heading">
+    <div class="space__header">
+      <span class="space__kicker mono">Prostor &amp; komunita</span>
+      <div>
+        <h2 class="space__heading" id="space-heading">
+          Kde se Žižkov<br>zastaví na chvíli.
+        </h2>
+        <p class="space__subtext">
+          Původní strop, opotřebený bar, starý parket. Dali jsme místu prostor
+          být tím, čím je. Přijďte s notebookem, s kamarádem, nebo sami jen
+          s knihou.
+        </p>
+      </div>
+    </div>
+
+    <div class="gallery" aria-label="Fotogalerie kavárny">
+      <div class="gallery__item gallery__item--a">
+        <img
+          src="images/gallery-interior.png"
+          alt="Interiér Kofárny Žižkov — světlý bar s betonovými stěnami"
+          loading="lazy"
+        />
+        <span class="gallery__caption mono">Interiér / Bar</span>
+      </div>
+      <div class="gallery__item gallery__item--b">
+        <img
+          src="images/gallery-corner.png"
+          alt="Rohový stolek u okna s výhledem na Žižkov"
+          loading="lazy"
+        />
+        <span class="gallery__caption mono">Rohový stolek</span>
+      </div>
+      <div class="gallery__item gallery__item--c">
+        <img
+          src="images/gallery-barista.png"
+          alt="Ruce baristy při tamprování kávy"
+          loading="lazy"
+        />
+        <span class="gallery__caption mono">Příprava espresso</span>
+      </div>
+      <div class="gallery__item gallery__item--d">
+        <img
+          src="images/gallery-flatwhite.png"
+          alt="Flat white s latte art na betonovém stole"
+          loading="lazy"
+        />
+        <span class="gallery__caption mono">Flat white</span>
+      </div>
+      <div class="gallery__item gallery__item--e">
+        <img
+          src="images/hero-espresso.png"
+          alt="Espresso na baru"
+          loading="lazy"
+        />
+        <span class="gallery__caption mono">Espresso</span>
+      </div>
+      <div class="gallery__item gallery__item--f">
+        <img
+          src="images/gallery-beans.png"
+          alt="Single origin pytlíky s kávou"
+          loading="lazy"
+        />
+        <span class="gallery__caption mono">Single Origin výběr</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMMUNITY QUOTE ===== -->
+  <div class="community fade-in">
+    <blockquote class="community__quote">
+      „Tady se<br>nemůžete ztratit.<br><em>Sem patříte."</em>
+    </blockquote>
+    <div class="community__text">
+      <p>
+        Kofárna Žižkov je místo, kde se ostatní hosté časem stanou
+        poznanými tvářemi. Kde barista ví, jak berete kávu, aniž byste
+        museli říkat.
+      </p>
+      <p>
+        Pořádáme cupping sessions, večery pro místní umělce a občasné
+        filmové promítání v zadní místnosti. Sledujte nás na Instagramu,
+        ať vám nic neunikne.
+      </p>
+      <p>
+        <a href="https://instagram.com/kofarna.zizkov" class="footer__ig-link" target="_blank" rel="noopener">
+          @kofarna.zizkov na Instagramu
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== HODINY + MENU DEN ===== -->
+  <div class="hours-row border-top fade-in">
+    <div class="hours-col">
+      <h2 class="hours__heading mono">— Otevírací hodiny</h2>
+      <table class="hours__table" aria-label="Otevírací hodiny">
+        <tr>
+          <td class="open-today">Pondělí – Pátek</td>
+          <td class="open-today">7:30 – 18:00</td>
+        </tr>
+        <tr>
+          <td>Sobota</td>
+          <td>8:30 – 17:00</td>
+        </tr>
+        <tr>
+          <td>Neděle</td>
+          <td>8:30 – 17:00</td>
+        </tr>
+        <tr>
+          <td class="closed">Státní svátky</td>
+          <td class="closed">Viz Instagram</td>
+        </tr>
+      </table>
+    </div>
+    <div class="hours-col">
+      <h2 class="hours__heading mono">— Dnešní speciál</h2>
+      <ul class="specials__list">
+        <li>
+          <span class="specials__name">Espresso — Etiopie, Yirgacheffe</span>
+          <span class="specials__note mono">přírodní</span>
+        </li>
+        <li>
+          <span class="specials__name">Batch Brew — Kolumbie, Huila</span>
+          <span class="specials__note mono">omytá</span>
+        </li>
+        <li>
+          <span class="specials__name">Šnek s kardamonem</span>
+          <span class="specials__note mono">pečeno dnes ráno</span>
+        </li>
+        <li>
+          <span class="specials__name">Mléčné alternativy</span>
+          <span class="specials__note mono">oves, mandle, sója</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer aria-label="Zápatí">
+    <div class="footer__main">
+      <div>
+        <p class="footer__brand-name">Kofárna Žižkov</p>
+        <p class="footer__brand-sub mono">Specialty Coffee — Praha 3</p>
+        <p class="footer__desc">
+          Malá kavárna s velkou péčí o kávu. V srdci Žižkova, na místě,
+          které tu bylo dávno před specialty trendem.
+        </p>
+      </div>
+
+      <div>
+        <p class="footer__col-heading mono">Najdete nás</p>
+        <address class="footer__address-street" style="font-style:normal;">
+          Seifertova 42<br>
+          130 00 Praha 3 – Žižkov<br>
+          Česká republika
+        </address>
+        <a
+          href="https://instagram.com/kofarna.zizkov"
+          class="footer__ig-link"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram Kofárna Žižkov"
+        >
+          @kofarna.zizkov
+        </a>
+      </div>
+
+      <div>
+        <p class="footer__col-heading mono">Kontakt</p>
+        <ul class="footer__list">
+          <li><a href="mailto:kofarna@zizkov.cz">kofarna@zizkov.cz</a></li>
+          <li><a href="tel:+420777111222">+420 777 111 222</a></li>
+          <li style="opacity:0.35; margin-top:0.5rem;">IČO: 12345678</li>
+        </ul>
+        <p class="footer__col-heading mono" style="margin-top:2rem;">Sledujte nás</p>
+        <ul class="footer__list">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="footer__copy mono">© 2024 Kofárna Žižkov — Všechna práva vyhrazena</span>
+      <span class="footer__made mono">Žižkov, Praha 3</span>
+    </div>
+  </footer>
+
+  <!-- ===== SCROLL ANIMATION JS ===== -->
+  <script>
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
