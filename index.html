@@ -7,24 +7,32 @@
   <meta name="description" content="Specialty coffee bar v srdci Žižkova. Espresso bar, batch brew, domácí pečivo. Přijďte na dobrou kávu." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* =============================================
        DESIGN TOKENS
     ============================================= */
     :root {
-      --espresso:    #2B1F18;
-      --charcoal:    #1C1C1B;
-      --oat:         #F0E8DC;
-      --cream:       #FAF6F0;
-      --terracotta:  #B85C38;
-      --sage:        #4A5C4E;
-      --mid-brown:   #6B4F3A;
-      --light-rule:  #D6CCBF;
-      --mono:        'IBM Plex Mono', monospace;
-      --serif:       'Playfair Display', serif;
-      --sans:        'IBM Plex Sans', sans-serif;
+      --black:       #0D0D0D;
+      --charcoal:    #1A1A1A;
+      --ash:         #E8E8E5;
+      --paper:       #F5F5F2;
+      --white:       #FFFFFF;
+      --rule:        #D0D0CC;
+      --mid:         #6A6A65;
+      --accent:      #1A1A1A;
+      --mono:        'DM Mono', monospace;
+      --serif:       'DM Mono', monospace;
+      --sans:        'Inter', sans-serif;
+      /* legacy aliases kept for sections below */
+      --espresso:    #0D0D0D;
+      --oat:         #F5F5F2;
+      --cream:       #FFFFFF;
+      --terracotta:  #1A1A1A;
+      --sage:        #6A6A65;
+      --mid-brown:   #6A6A65;
+      --light-rule:  #D0D0CC;
     }
 
     /* =============================================
@@ -33,7 +41,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      background: var(--cream);
+      background: var(--paper);
       color: var(--charcoal);
       font-family: var(--sans);
       font-weight: 300;
@@ -65,17 +73,18 @@
       justify-content: space-between;
       padding: 0 2.5rem;
       height: 3.5rem;
-      background: var(--espresso);
-      border-bottom: 2px solid var(--terracotta);
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
     }
     .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--oat);
-      letter-spacing: 0.03em;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--black);
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
     }
-    .nav-logo span { color: var(--terracotta); }
+    .nav-logo span { opacity: 0.45; }
     .nav-links {
       display: flex;
       gap: 2rem;
@@ -83,11 +92,11 @@
     }
     .nav-links a {
       font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--oat);
-      opacity: 0.75;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      color: var(--black);
+      opacity: 0.55;
       transition: opacity 0.2s;
     }
     .nav-links a:hover { opacity: 1; }
@@ -95,135 +104,131 @@
       font-family: var(--mono);
       font-size: 0.65rem;
       letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--espresso);
-      background: var(--terracotta);
+      text-transform: lowercase;
+      color: var(--white);
+      background: var(--black);
       padding: 0.45rem 1.1rem;
-      font-weight: 500;
+      font-weight: 400;
       transition: background 0.2s;
     }
-    .nav-cta:hover { background: var(--oat); }
+    .nav-cta:hover { background: var(--mid); }
 
     /* =============================================
-       HERO — SPLIT SCREEN
+       HERO — ASYMMETRIC FULL HEIGHT
     ============================================= */
     .hero {
       margin-top: 3.5rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 55% 45%;
       min-height: calc(100vh - 3.5rem);
+      background: var(--white);
     }
     .hero__image-col {
       position: relative;
       overflow: hidden;
-      background: var(--espresso);
+      background: var(--ash);
     }
     .hero__image-col img {
-      height: 100%;
-      transition: transform 6s ease;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 8s ease;
+      filter: brightness(1.02) contrast(1.04);
     }
-    .hero__image-col:hover img { transform: scale(1.025); }
+    .hero__image-col:hover img { transform: scale(1.03); }
     .hero__image-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(43,31,24,0.35) 0%,
-        rgba(43,31,24,0.0) 100%
-      );
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 60%, rgba(245,245,242,0.18) 100%);
     }
     .hero__tag {
       position: absolute;
       bottom: 2rem; left: 2rem;
       font-family: var(--mono);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--oat);
-      background: var(--terracotta);
-      padding: 0.35rem 0.8rem;
+      font-size: 0.6rem;
+      text-transform: lowercase;
+      letter-spacing: 0.18em;
+      color: var(--black);
+      background: var(--white);
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--rule);
     }
 
     .hero__content-col {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 4rem 3.5rem 3.5rem;
-      background: var(--oat);
-      border-left: 3px solid var(--espresso);
+      padding: 5rem 4rem 4rem 4rem;
+      background: var(--white);
+      border-left: 1px solid var(--rule);
     }
     .hero__eyebrow {
       font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--mid-brown);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .hero__eyebrow::before {
-      content: '';
-      display: block;
-      width: 2rem;
-      height: 1px;
-      background: var(--terracotta);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: lowercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
     }
     .hero__headline {
-      font-family: var(--serif);
-      font-weight: 900;
-      font-size: clamp(3.2rem, 6vw, 6rem);
-      line-height: 0.95;
-      color: var(--espresso);
-      letter-spacing: -0.02em;
-    }
-    .hero__headline em {
-      font-style: italic;
-      color: var(--terracotta);
-      display: block;
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: clamp(2rem, 3.2vw, 3.4rem);
+      line-height: 1.15;
+      color: var(--black);
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
     }
     .hero__subline {
-      margin-top: 2rem;
+      margin-top: 2.5rem;
       font-family: var(--sans);
-      font-size: 1rem;
+      font-size: 0.92rem;
       font-weight: 300;
-      color: var(--mid-brown);
-      max-width: 28ch;
-      line-height: 1.7;
-      border-left: 2px solid var(--terracotta);
-      padding-left: 1rem;
+      color: var(--mid);
+      max-width: 36ch;
+      line-height: 1.85;
     }
+    .hero__beansmith {
+      margin-top: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: lowercase;
+      color: var(--black);
+      opacity: 0.5;
+    }
+    .hero__beansmith a { text-decoration: underline; opacity: 1; }
     .hero__meta {
       margin-top: auto;
       padding-top: 2.5rem;
-      border-top: 1px solid var(--light-rule);
+      border-top: 1px solid var(--rule);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      gap: 1.75rem;
     }
     .hero__meta-item {
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: 0.3rem;
     }
     .hero__meta-label {
       font-family: var(--mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mid-brown);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
+      color: var(--mid);
       opacity: 0.7;
     }
     .hero__meta-value {
       font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--espresso);
-      font-weight: 500;
+      font-size: 0.8rem;
+      color: var(--black);
+      font-weight: 400;
+      line-height: 1.5;
     }
     .hero__meta-value strong {
       display: block;
-      font-size: 1rem;
+      font-size: 0.88rem;
+      font-weight: 500;
     }
 
     /* =============================================
@@ -378,7 +383,6 @@
       align-self: flex-start;
       padding-top: 0.4rem;
     }
-    .craft__item-content {}
     .craft__item-name {
       font-family: var(--serif);
       font-size: clamp(1.4rem, 2.5vw, 2.1rem);
@@ -574,9 +578,197 @@
     .community__text p + p { margin-top: 1rem; }
 
     /* =============================================
+       SECTION: FULL MENU
+    ============================================= */
+    .fullmenu {
+      padding: 6rem 2.5rem;
+      background: var(--white);
+      border-top: 1px solid var(--rule);
+    }
+    .fullmenu__header {
+      max-width: 1200px;
+      margin: 0 auto 3.5rem;
+    }
+    .fullmenu__kicker {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
+      color: var(--mid);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .fullmenu__heading {
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+    }
+    .fullmenu__grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--rule);
+    }
+    .fullmenu__col {
+      padding: 2.5rem;
+      border-right: 1px solid var(--rule);
+    }
+    .fullmenu__col:last-child { border-right: none; }
+    .fullmenu__cat {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
+      color: var(--mid);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .fullmenu__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .fullmenu__list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--charcoal);
+    }
+    .fullmenu__list li span:first-child { flex: 1; }
+    .fullmenu__list li span:last-child {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--mid);
+      white-space: nowrap;
+    }
+    .fullmenu__note {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+      opacity: 0.7;
+      margin-top: 0.5rem;
+    }
+
+    /* =============================================
+       SECTION: GOOGLE REVIEWS
+    ============================================= */
+    .reviews {
+      padding: 6rem 2.5rem;
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+    }
+    .reviews__header {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+    .reviews__kicker {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
+      color: var(--mid);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .reviews__heading {
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: clamp(1.75rem, 3.5vw, 3rem);
+      line-height: 1.12;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      margin-bottom: 1.25rem;
+    }
+    .reviews__heading em {
+      font-style: normal;
+      opacity: 0.4;
+    }
+    .reviews__stars {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .reviews__stars span { color: var(--black); font-size: 1rem; }
+    .reviews__score {
+      font-family: var(--mono);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-left: 0.4rem;
+    }
+    .reviews__count {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--mid) !important;
+      margin-left: 0.25rem;
+    }
+    .reviews__grid {
+      max-width: 1200px;
+      margin: 0 auto 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .reviews__card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .reviews__card-stars { font-size: 0.85rem; color: var(--black); letter-spacing: 0.1em; }
+    .reviews__card-text {
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--charcoal);
+      font-style: normal;
+      flex: 1;
+    }
+    .reviews__card-author {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: lowercase;
+      color: var(--mid);
+      opacity: 0.7;
+    }
+    .reviews__cta {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      color: var(--black);
+      border: 1px solid var(--rule);
+      padding: 0.6rem 1.5rem;
+      transition: background 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+    .reviews__cta:hover {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    /* =============================================
        SECTION: DENNÍ MENU / OTÁVÍRACÍ DOBA
     ============================================= */
     .hours-row {
+
       display: grid;
       grid-template-columns: 1fr 1fr;
       border-top: 1px solid var(--light-rule);
@@ -794,6 +986,12 @@
 
       .community { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
       .hours-row { grid-template-columns: 1fr; }
+      .fullmenu { padding: 4rem 1.5rem; }
+      .fullmenu__grid { grid-template-columns: 1fr; }
+      .fullmenu__col { border-right: none; border-bottom: 1px solid var(--rule); }
+      .fullmenu__col:last-child { border-bottom: none; }
+      .reviews { padding: 4rem 1.5rem; }
+      .reviews__grid { grid-template-columns: 1fr; }
       .hours-col:first-child { border-right: none; border-bottom: 1px solid var(--light-rule); }
       .hours-col { padding: 2.5rem 1.5rem; }
 
@@ -810,13 +1008,14 @@
 
   <!-- ===== NAV ===== -->
   <nav aria-label="Hlavní navigace">
-    <span class="nav-logo">Kofárna <span>Žižkov</span></span>
+    <span class="nav-logo">kofárna <span>· žižkov</span></span>
     <ul class="nav-links">
-      <li><a href="#remeslo">Řemeslo</a></li>
-      <li><a href="#prostor">Prostor</a></li>
-      <li><a href="#casy">Otevírací hodiny</a></li>
+      <li><a href="#remeslo">řemeslo</a></li>
+      <li><a href="#menu">menu</a></li>
+      <li><a href="#prostor">prostor</a></li>
+      <li><a href="#casy">hodiny</a></li>
     </ul>
-    <a href="#casy" class="nav-cta">Navštivte nás</a>
+    <a href="#casy" class="nav-cta">navštivte nás</a>
   </nav>
 
   <!-- ===== HERO ===== -->
@@ -828,45 +1027,50 @@
         loading="eager"
       />
       <div class="hero__image-overlay"></div>
-      <div class="hero__tag mono">Praha 3 — Žižkov</div>
+      <div class="hero__tag mono">praha 3 — žižkov</div>
     </div>
 
     <div class="hero__content-col">
       <div>
-        <p class="hero__eyebrow">Specialty coffee bar</p>
+        <p class="hero__eyebrow">specialty coffee bar · est. 2022</p>
         <h1 class="hero__headline">
-          Káva,
-          <em>která<br>něco říká.</em>
+          poctivá<br>
+          káva<br>
+          bez<br>
+          zbytečností.
         </h1>
         <p class="hero__subline">
-          Není tu nic navíc. Jen poctivá káva z pečlivě vybraných
-          zdrojů, starý bar a čtvrtě plná charakteru.
+          Malý bar v srdci Žižkova. Pražená zrna vybraná pro jejich příběh,
+          ne pro cenu. Každý šálek připravený s péčí.
+        </p>
+        <p class="hero__beansmith">
+          praženo partnerem <a href="#remeslo">Beansmith Praha</a>
         </p>
       </div>
 
       <div class="hero__meta" id="casy">
         <div class="hero__meta-item">
-          <span class="hero__meta-label">Adresa</span>
+          <span class="hero__meta-label">adresa</span>
           <span class="hero__meta-value">
             <strong>Seifertova 42</strong>
             Praha 3 – Žižkov
           </span>
         </div>
         <div class="hero__meta-item">
-          <span class="hero__meta-label">Otevírací hodiny</span>
+          <span class="hero__meta-label">otevírací hodiny</span>
           <span class="hero__meta-value">
             <strong>Po–Pá: 7:30–18:00</strong>
             So–Ne: 8:30–17:00
           </span>
         </div>
         <div class="hero__meta-item">
-          <span class="hero__meta-label">Kontakt</span>
+          <span class="hero__meta-label">kontakt</span>
           <span class="hero__meta-value">
             kofarna@zizkov.cz
           </span>
         </div>
         <div class="hero__meta-item">
-          <span class="hero__meta-label">Instagram</span>
+          <span class="hero__meta-label">instagram</span>
           <span class="hero__meta-value">
             @kofarna.zizkov
           </span>
@@ -1120,6 +1324,104 @@
       </p>
     </div>
   </div>
+
+  <!-- ===== FULL MENU ===== -->
+  <section class="fullmenu fade-in" id="menu" aria-labelledby="menu-heading">
+    <div class="fullmenu__header">
+      <span class="fullmenu__kicker mono">— menu</span>
+      <h2 class="fullmenu__heading" id="menu-heading">co si dáte<br>u nás?</h2>
+    </div>
+    <div class="fullmenu__grid">
+
+      <div class="fullmenu__col">
+        <h3 class="fullmenu__cat">Espresso bar</h3>
+        <ul class="fullmenu__list">
+          <li><span>Espresso</span><span>55 Kč</span></li>
+          <li><span>Doppio</span><span>70 Kč</span></li>
+          <li><span>Ristretto</span><span>55 Kč</span></li>
+          <li><span>Cortado</span><span>65 Kč</span></li>
+          <li><span>Flat White</span><span>80 Kč</span></li>
+          <li><span>Cappuccino</span><span>80 Kč</span></li>
+          <li><span>Latte</span><span>80 Kč</span></li>
+          <li><span>Lungo</span><span>60 Kč</span></li>
+        </ul>
+        <p class="fullmenu__note mono">+ 10 Kč alternativní mléko (oves, mandle, sója)</p>
+      </div>
+
+      <div class="fullmenu__col">
+        <h3 class="fullmenu__cat">Filter coffee</h3>
+        <ul class="fullmenu__list">
+          <li><span>Batch Brew — malý</span><span>60 Kč</span></li>
+          <li><span>Batch Brew — velký</span><span>75 Kč</span></li>
+          <li><span>Pour Over V60</span><span>120 Kč</span></li>
+          <li><span>Pour Over Chemex</span><span>130 Kč</span></li>
+          <li><span>Cold Brew</span><span>90 Kč</span></li>
+        </ul>
+        <h3 class="fullmenu__cat" style="margin-top:2rem">Nešálkové</h3>
+        <ul class="fullmenu__list">
+          <li><span>Horká čokolada</span><span>75 Kč</span></li>
+          <li><span>Maté latte</span><span>80 Kč</span></li>
+          <li><span>Voda / perlivka</span><span>30 Kč</span></li>
+        </ul>
+      </div>
+
+      <div class="fullmenu__col">
+        <h3 class="fullmenu__cat">Pečivo &amp; jídlo</h3>
+        <ul class="fullmenu__list">
+          <li><span>Croissant — masło</span><span>65 Kč</span></li>
+          <li><span>Šnek s kardamonem</span><span>65 Kč</span></li>
+          <li><span>Banana bread</span><span>60 Kč</span></li>
+          <li><span>Sezónní cheesecake</span><span>90 Kč</span></li>
+          <li><span>Toast se sýrem</span><span>95 Kč</span></li>
+          <li><span>Avókádový toast</span><span>120 Kč</span></li>
+        </ul>
+        <p class="fullmenu__note mono">všechno pečivo — místní pekárna 2 bloky odtud</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GOOGLE REVIEWS ===== -->
+  <section class="reviews fade-in" aria-labelledby="reviews-heading">
+    <div class="reviews__header">
+      <span class="reviews__kicker mono">— recenze</span>
+      <h2 class="reviews__heading" id="reviews-heading">co říkají<br><em>naši hosté.</em></h2>
+      <div class="reviews__stars" aria-label="Hodnocení 4,9 z 5">
+        <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+        <span class="reviews__score">4,9</span>
+        <span class="reviews__count mono">/ 5 · 127 recenzí na Google</span>
+      </div>
+    </div>
+    <div class="reviews__grid">
+      <div class="reviews__card">
+        <div class="reviews__card-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="reviews__card-text">
+          „Nejlepší flat white v Praze 3. Bar je příjemný, baristi vědí, co dělají. Budu se vracet.&ldquo;
+        </blockquote>
+        <div class="reviews__card-author mono">Markéta V. — Google</div>
+      </div>
+      <div class="reviews__card">
+        <div class="reviews__card-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="reviews__card-text">
+          „Konečně poctivá specialty kavárna na Žižkově. Batch brew ze Etiopie byl bezčelný. A k tomu jesenní cheesecake — no nádhera.&ldquo;
+        </blockquote>
+        <div class="reviews__card-author mono">Tomáš H. — Google</div>
+      </div>
+      <div class="reviews__card">
+        <div class="reviews__card-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="reviews__card-text">
+          „Máme to kousek od domu a uvítá nás tam atmosféra, ne estetika pro Instagram. Prosám, každdý den dostávejte šneky s kardamonem.&ldquo;
+        </blockquote>
+        <div class="reviews__card-author mono">Petra K. — Google</div>
+      </div>
+    </div>
+    <a
+      href="https://g.page/r/kofarna-zizkov/review"
+      class="reviews__cta"
+      target="_blank"
+      rel="noopener"
+    >+ ohodnoťte nás na Google</a>
+  </section>
 
   <!-- ===== HODINY + MENU DEN ===== -->
   <div class="hours-row border-top fade-in">
